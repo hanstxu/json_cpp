@@ -38,11 +38,14 @@ std::string JSONArray::toString() const {
   
   std::vector<std::string>::const_iterator str_it = m_strings.begin();
   if (str_it != m_strings.end()) {
-    result += "\n\x20\x20" + tab_spaces + getJSONString(*str_it);
+    result += "\n\x20\x20" + tab_spaces;
+    result += (*str_it == "" ? "null" : getJSONString(*str_it));
     ++str_it;
   }
-  for (; str_it != m_strings.end(); ++str_it)
-    result += ",\n\x20\x20" + tab_spaces + getJSONString(*str_it);
+  for (; str_it != m_strings.end(); ++str_it) {
+    result += ",\n\x20\x20" + tab_spaces;
+    result += (*str_it == "" ? "null" : getJSONString(*str_it));
+  }
 
   std::vector<bool>::const_iterator bool_it = m_booleans.begin();
   if (bool_it != m_booleans.end()) {

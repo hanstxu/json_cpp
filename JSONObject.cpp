@@ -39,13 +39,13 @@ std::string JSONObject::toString() const {
   
   std::map<std::string, std::string>::const_iterator str_it = m_strings.begin();
   if (str_it != m_strings.end()) {
-    result += "\n\x20\x20" + tab_spaces + getJSONString(str_it->first);
-    result += ": " + getJSONString(str_it->second);
+    result += "\n\x20\x20" + tab_spaces + getJSONString(str_it->first) + ": ";
+    result += (str_it->second == "" ? "null" : getJSONString(str_it->second));
 	++str_it;
   }
   for (; str_it != m_strings.end(); ++str_it) {
-    result += ",\n\x20\x20" + tab_spaces + getJSONString(str_it->first);
-    result += ": " + getJSONString(str_it->second);
+    result += ",\n\x20\x20" + tab_spaces + getJSONString(str_it->first) + ": ";
+    result += (str_it->second == "" ? "null" : getJSONString(str_it->second));
   }
   
   std::map<std::string, bool>::const_iterator bool_it = m_booleans.begin();

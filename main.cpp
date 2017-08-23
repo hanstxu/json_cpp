@@ -12,7 +12,7 @@ int main() {
   object.addBoolean("4", false);
   JSONArray array;
   array.addString("item one");
-  array.addString("item two");
+  array.addString("");
   array.addBoolean(true);
   array.addBoolean(false);
   JSONObject test;
