@@ -15,10 +15,14 @@ int main() {
   array.addString("");
   array.addBoolean(true);
   array.addBoolean(false);
+  array.addNumber(17);
+  array.addNumber(-23);
   JSONObject test;
   test.addArray("1", array);
   test.addObject("2", object);
   test.addObject("3", test);
+  test.addNumber("4", 18);
+  test.addNumber("5", -20);
   cout << test.toString() << endl;
   return 0;
 }
