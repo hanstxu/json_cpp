@@ -6,6 +6,10 @@ void JSONObject::addString(std::string key, std::string value) {
   m_strings[key] = value;
 }
 
+void JSONObject::addBoolean(std::string key, bool value) {
+  m_booleans[key] = value;
+}
+
 void JSONObject::addObject(std::string key, JSONObject value) {
   value.updateTabs(1);
   m_objects[key] = value;
@@ -27,7 +31,8 @@ void JSONObject::updateTabs(unsigned int num_tabs) {
 }
 
 std::string JSONObject::toString() const {
-  if (m_strings.size() + m_objects.size() + m_arrays.size() < 1)
+  if (m_strings.size() + m_booleans.size() +
+    m_objects.size() + m_arrays.size() < 1)
     return "{}";
 
   std::string result = "{";
@@ -41,6 +46,17 @@ std::string JSONObject::toString() const {
   for (; str_it != m_strings.end(); ++str_it) {
     result += ",\n\x20\x20" + tab_spaces + getJSONString(str_it->first);
     result += ": " + getJSONString(str_it->second);
+  }
+  
+  std::map<std::string, bool>::const_iterator bool_it = m_booleans.begin();
+  if (bool_it != m_booleans.end()) {
+    result += "\n\x20\x20" + tab_spaces + getJSONString(bool_it->first) + ": ";
+    result += (bool_it->second ? "true" : "false");
+	++bool_it;
+  }
+  for (; bool_it != m_booleans.end(); ++bool_it) {
+    result += ",\n\x20\x20" + tab_spaces + getJSONString(bool_it->first) + ": ";
+    result += (bool_it->second ? "true" : "false");
   }
   
   std::map<std::string, JSONObject>::const_iterator obj_it = m_objects.begin();

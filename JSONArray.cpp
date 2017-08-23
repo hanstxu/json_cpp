@@ -6,6 +6,10 @@ void JSONArray::addString(std::string value) {
   m_strings.push_back(value);
 }
 
+void JSONArray::addBoolean(bool value) {
+  m_booleans.push_back(value);
+}
+
 void JSONArray::addArray(JSONArray value) {
   value.updateTabs(1);
   m_arrays.push_back(value);
@@ -26,7 +30,8 @@ void JSONArray::updateTabs(unsigned int num_tabs) {
 
 
 std::string JSONArray::toString() const {
-  if (m_strings.size() + m_arrays.size() + m_objects.size() < 1)
+  if (m_strings.size() + m_booleans.size() +
+    m_arrays.size() + m_objects.size() < 1)
     return "[]";
   
   std::string result = "[";
@@ -38,7 +43,15 @@ std::string JSONArray::toString() const {
   }
   for (; str_it != m_strings.end(); ++str_it)
     result += ",\n\x20\x20" + tab_spaces + getJSONString(*str_it);
-  
+
+  std::vector<bool>::const_iterator bool_it = m_booleans.begin();
+  if (bool_it != m_booleans.end()) {
+    result += "\n\x20\x20" + tab_spaces + (*bool_it ? "true" : "false");
+    ++bool_it;
+  }
+  for (; bool_it != m_booleans.end(); ++bool_it)
+    result += ",\n\x20\x20" + tab_spaces + (*bool_it ? "true" : "false");
+
   std::vector<JSONArray>::const_iterator arr_it = m_arrays.begin();
   if (m_strings.size() < 1 && arr_it != m_arrays.end()) {
     result += "\n\x20\x20" + tab_spaces + arr_it->toString();
