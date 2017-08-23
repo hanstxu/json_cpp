@@ -14,6 +14,7 @@ public:
   void addString(std::string key, std::string value);
   void addObject(std::string key, JSONObject value);
   void addArray(std::string key, JSONArray value);
+  void updateTabs(unsigned int num_tabs);
   std::string toString() const;
 private:
   std::map<std::string, std::string> m_strings;

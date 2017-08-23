@@ -7,11 +7,10 @@ using namespace std;
 int main() {
   JSONObject object;
   object.addString("1", "hello");
-  object.addString("2", "stuff");
-  //cout << object.toString() << endl;
+  object.addString("2", "world");
   JSONArray array;
-  array.addString("what up");
-  array.addString("timeout");
+  array.addString("item one");
+  array.addString("item two");
   JSONObject test;
   test.addArray("1", array);
   test.addObject("2", object);

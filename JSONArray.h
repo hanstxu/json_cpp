@@ -14,6 +14,7 @@ public:
   void addString(std::string value);
   void addArray(JSONArray value);
   void addObject(JSONObject value);
+  void updateTabs(unsigned int num_tabs);
   std::string toString() const;
 private:
   std::vector<std::string> m_strings;
