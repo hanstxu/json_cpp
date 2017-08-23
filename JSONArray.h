@@ -1,13 +1,15 @@
 #ifndef JSONARRAY_H
 #define JSONARRAY_H
 
+#include "JSONInterface.h"
 #include <vector>
 #include <string>
 
-class JSONArray {
+class JSONArray : public JSONInterface {
 public:
   JSONArray();
-  std::string to_string() const;
+  void addString(std::string value);
+  std::string toString() const;
 private:
   std::vector<std::string> m_strings;
 };

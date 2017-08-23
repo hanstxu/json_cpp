@@ -1,7 +1,7 @@
 CXX=g++
 CXXOPTIMIZE= -O2
 CXXFLAGS= -g -Wall -std=c++0x $(CXXOPTIMIZE)
-CLASSES=JSONObject.h JSONArray.h
+CLASSES=JSONInterface.h JSONObject.h JSONArray.h JSONObject.cpp JSONArray.cpp
 
 all: main
 
