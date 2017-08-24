@@ -2,24 +2,34 @@
 
 JSONArray::JSONArray() {}
 
-void JSONArray::addString(std::string value) {
+template <typename T>
+void JSONArray::add(T value) {
+  add<T>(this, value);
+}
+
+template <>
+void JSONArray::add<std::string>(std::string value) {
   m_strings.push_back(value);
 }
 
-void JSONArray::addNumber(int value) {
+template <>
+void JSONArray::add<int>(int value) {
   m_numbers.push_back(value);
 }
 
-void JSONArray::addBoolean(bool value) {
+template <>
+void JSONArray::add<bool>(bool value) {
   m_booleans.push_back(value);
 }
 
-void JSONArray::addArray(JSONArray value) {
+template <>
+void JSONArray::add<JSONArray>(JSONArray value) {
   value.updateTabs(1);
   m_arrays.push_back(value);
 }
 
-void JSONArray::addObject(JSONObject value) {
+template <>
+void JSONArray::add<JSONObject>(JSONObject value) {
   value.updateTabs(1);
   m_objects.push_back(value);
 }

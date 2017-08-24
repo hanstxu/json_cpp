@@ -11,11 +11,8 @@ class JSONArray;
 class JSONObject : public JSONInterface {
 public:
   JSONObject();
-  void addString(std::string key, std::string value);
-  void addNumber(std::string key, int value);
-  void addBoolean(std::string key, bool value);
-  void addObject(std::string key, JSONObject value);
-  void addArray(std::string key, JSONArray value);
+  template <typename T>
+  void add(std::string key, T value);
   void updateTabs(unsigned int num_tabs);
   std::string toString() const;
 private:

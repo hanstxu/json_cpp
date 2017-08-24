@@ -2,24 +2,34 @@
 
 JSONObject::JSONObject() {}
 
-void JSONObject::addString(std::string key, std::string value) {
+template <typename T>
+void JSONObject::add(std::string key, T value) {
+  add<T>(this, key, value);
+}
+
+template <>
+void JSONObject::add<std::string>(std::string key, std::string value) {
   m_strings[key] = value;
 }
 
-void JSONObject::addNumber(std::string key, int value) {
+template <>
+void JSONObject::add<int>(std::string key, int value) {
   m_numbers[key] = value;
 }
 
-void JSONObject::addBoolean(std::string key, bool value) {
-  m_booleans[key] = value;
+template <>
+void JSONObject::add<bool>(std::string key, bool value) {
+  m_numbers[key] = value;
 }
 
-void JSONObject::addObject(std::string key, JSONObject value) {
+template <>
+void JSONObject::add<JSONObject>(std::string key, JSONObject value) {
   value.updateTabs(1);
   m_objects[key] = value;
 }
 
-void JSONObject::addArray(std::string key, JSONArray value) {
+template <>
+void JSONObject::add<JSONArray>(std::string key, JSONArray value) {
   value.updateTabs(1);
   m_arrays[key] = value;
 }
