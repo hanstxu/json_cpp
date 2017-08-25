@@ -49,7 +49,7 @@ void JSONObject::add<int>(std::string key, int value) {
 
 template <>
 void JSONObject::add<bool>(std::string key, bool value) {
-  m_numbers[key] = value;
+  m_booleans[key] = value;
 }
 
 template <>
