@@ -13,7 +13,7 @@ public:
   JSONArray();
   template <typename T>
   void add(T value);
-  void updateTabs(unsigned int num_tabs);
+  void updateTabs(int num_tabs);
   std::string toString() const;
 private:
   std::vector<std::string> m_strings;

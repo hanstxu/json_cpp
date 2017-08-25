@@ -34,12 +34,12 @@ void JSONArray::add<JSONObject>(JSONObject value) {
   m_objects.push_back(value);
 }
 
-void JSONArray::updateTabs(unsigned int num_tabs) {
+void JSONArray::updateTabs(int num_tabs) {
   updateNumTabSpaces(num_tabs);
   for (unsigned int i = 0; i < m_arrays.size(); i++)
-    m_arrays[i].updateTabs(num_tabs + 1);
+    m_arrays[i].updateTabs(num_tabs == -1 ? -1 : num_tabs + 1);
   for (unsigned int i = 0; i < m_objects.size(); i++)
-    m_objects[i].updateTabs(num_tabs + 1);
+    m_objects[i].updateTabs(num_tabs == -1 ? -1 : num_tabs + 1);
 }
 
 
@@ -62,7 +62,7 @@ std::string JSONArray::toString() const {
   }
   
   std::vector<int>::const_iterator num_it = m_numbers.begin();
-  if (num_it != m_numbers.end()) {
+  if (m_strings.size() < 1 && num_it != m_numbers.end()) {
     result += "\n\x20\x20" + tab_spaces + getJSONNumber(*num_it);
     ++num_it;
   }
@@ -70,7 +70,8 @@ std::string JSONArray::toString() const {
     result += ",\n\x20\x20" + tab_spaces + getJSONNumber(*num_it);
   
   std::vector<bool>::const_iterator bool_it = m_booleans.begin();
-  if (bool_it != m_booleans.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 &&
+    bool_it != m_booleans.end()) {
     result += "\n\x20\x20" + tab_spaces + (*bool_it ? "true" : "false");
     ++bool_it;
   }
@@ -78,7 +79,8 @@ std::string JSONArray::toString() const {
     result += ",\n\x20\x20" + tab_spaces + (*bool_it ? "true" : "false");
 
   std::vector<JSONArray>::const_iterator arr_it = m_arrays.begin();
-  if (m_strings.size() < 1 && arr_it != m_arrays.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 && m_booleans.size() < 1 &&
+    arr_it != m_arrays.end()) {
     result += "\n\x20\x20" + tab_spaces + arr_it->toString();
     ++arr_it;
   }
@@ -86,8 +88,8 @@ std::string JSONArray::toString() const {
     result += ",\n\x20\x20" + tab_spaces + arr_it->toString();
   
   std::vector<JSONObject>::const_iterator obj_it = m_objects.begin();
-  if (m_strings.size() < 1 && m_arrays.size() < 1 &&
-    obj_it != m_objects.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 && m_booleans.size() < 1 &&
+    m_objects.size() < 1 && obj_it != m_objects.end()) {
     result += "\n\x20\x20" + tab_spaces + obj_it->toString();
     ++obj_it;
   }

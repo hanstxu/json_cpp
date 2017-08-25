@@ -25,9 +25,13 @@ public:
   virtual std::string toString() const = 0;
 protected:
   std::string tab_spaces;
-  void updateNumTabSpaces(unsigned int num_tabs) {
+  void updateNumTabSpaces(int num_tabs) {
+    if (num_tabs < 0) {
+      tab_spaces = tab_spaces.substr(0, tab_spaces.size() - 2);
+      return;
+    }
     tab_spaces = "";
-    for (unsigned int i = 0; i < num_tabs; i++)
+    for (int i = 0; i < num_tabs; i++)
       tab_spaces += "\x20\x20";
   }
 };

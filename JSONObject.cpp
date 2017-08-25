@@ -24,12 +24,16 @@ bool JSONObject::get<bool>(std::string key) {
 
 template <>
 JSONObject JSONObject::get<JSONObject>(std::string key) {
-  return m_objects[key];
+  JSONObject temp = m_objects[key];
+  temp.updateTabs(-1);
+  return temp;
 }
 
 template <>
 JSONArray JSONObject::get<JSONArray>(std::string key) {
-  return m_arrays[key];
+  JSONArray temp = m_arrays[key];
+  temp.updateTabs(-1);
+  return temp;
 }
 
 template <typename T>
@@ -64,14 +68,14 @@ void JSONObject::add<JSONArray>(std::string key, JSONArray value) {
   m_arrays[key] = value;
 }
 
-void JSONObject::updateTabs(unsigned int num_tabs) {
+void JSONObject::updateTabs(int num_tabs) {
   updateNumTabSpaces(num_tabs);
   std::map<std::string, JSONObject>::iterator obj_it;
   for (obj_it = m_objects.begin(); obj_it != m_objects.end(); ++obj_it)
-    obj_it->second.updateTabs(num_tabs + 1);
+    obj_it->second.updateTabs(num_tabs == -1 ? -1 : num_tabs + 1);
   std::map<std::string, JSONArray>::iterator arr_it;
   for (arr_it = m_arrays.begin(); arr_it != m_arrays.end(); ++arr_it)
-    arr_it->second.updateTabs(num_tabs + 1);
+    arr_it->second.updateTabs(num_tabs == -1 ? -1 : num_tabs + 1);
 }
 
 std::string JSONObject::toString() const {
@@ -93,7 +97,7 @@ std::string JSONObject::toString() const {
   }
   
   std::map<std::string, int>::const_iterator num_it = m_numbers.begin();
-  if (num_it != m_numbers.end()) {
+  if (m_strings.size() < 1 && num_it != m_numbers.end()) {
     result += "\n\x20\x20" + tab_spaces + getJSONString(num_it->first);
     result += ": " + getJSONNumber(num_it->second);
     ++num_it;
@@ -104,7 +108,8 @@ std::string JSONObject::toString() const {
   }
   
   std::map<std::string, bool>::const_iterator bool_it = m_booleans.begin();
-  if (bool_it != m_booleans.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 &&
+    bool_it != m_booleans.end()) {
     result += "\n\x20\x20" + tab_spaces + getJSONString(bool_it->first) + ": ";
     result += (bool_it->second ? "true" : "false");
 	++bool_it;
@@ -115,7 +120,8 @@ std::string JSONObject::toString() const {
   }
   
   std::map<std::string, JSONObject>::const_iterator obj_it = m_objects.begin();
-  if (m_strings.size() < 1 && obj_it != m_objects.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 && m_booleans.size() < 1 &&
+    obj_it != m_objects.end()) {
     result += "\n\x20\x20" + tab_spaces + getJSONString(obj_it->first);
     result += ": " + obj_it->second.toString();
     ++obj_it;
@@ -126,8 +132,8 @@ std::string JSONObject::toString() const {
   }
   
   std::map<std::string, JSONArray>::const_iterator arr_it = m_arrays.begin();
-  if (m_strings.size() < 1 && m_objects.size() < 1 &&
-    arr_it != m_arrays.end()) {
+  if (m_strings.size() < 1 && m_numbers.size() < 1 && m_booleans.size() < 1 &&
+    m_objects.size() < 1 && arr_it != m_arrays.end()) {
     result += "\n\x20\x20" + tab_spaces + getJSONString(arr_it->first);
     result += ": " + arr_it->second.toString();
     ++arr_it;

@@ -15,7 +15,7 @@ public:
   T get(std::string key);
   template <typename T>
   void add(std::string key, T value);
-  void updateTabs(unsigned int num_tabs);
+  void updateTabs(int num_tabs);
   std::string toString() const;
 private:
   std::map<std::string, std::string> m_strings;
