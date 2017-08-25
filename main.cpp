@@ -27,5 +27,12 @@ int main() {
   arr_test.add<JSONArray>(array);
   arr_test.add<JSONObject>(test);
   cout << arr_test.toString() << endl;
+  
+  cout << (object.get<bool>("3") == true) << endl;
+  cout << object.get<string>("1") << endl;
+  cout << test.get<int>("4") << endl;
+  cout << test.get<JSONArray>("1").toString() << endl;
+  cout << test.get<JSONObject>("2").toString() << endl;
+  
   return 0;
 }

@@ -3,6 +3,36 @@
 JSONObject::JSONObject() {}
 
 template <typename T>
+T JSONObject::get(std::string key) {
+  get<T>(this, key);
+}
+
+template <>
+std::string JSONObject::get<std::string>(std::string key) {
+  return m_strings[key];
+}
+
+template <>
+int JSONObject::get<int>(std::string key) {
+  return m_numbers[key];
+}
+
+template <>
+bool JSONObject::get<bool>(std::string key) {
+  return m_booleans[key];
+}
+
+template <>
+JSONObject JSONObject::get<JSONObject>(std::string key) {
+  return m_objects[key];
+}
+
+template <>
+JSONArray JSONObject::get<JSONArray>(std::string key) {
+  return m_arrays[key];
+}
+
+template <typename T>
 void JSONObject::add(std::string key, T value) {
   add<T>(this, key, value);
 }
