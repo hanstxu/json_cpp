@@ -57,7 +57,8 @@ int main() {
   
   //cout << parseJSON<JSONArray>("").toString() << endl;
   string test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
-  test += "\"4\": -12341.234, \"5\": .21923444}";
+  test += "\"4\": -12341.234, \"5\": .21923444 + \"6\": -1272, \"7\":87";
+  test += "}";
   cout << parseJSON<JSONObject>(test).toString() << endl;
   
   return 0;

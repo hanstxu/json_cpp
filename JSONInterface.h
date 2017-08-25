@@ -24,6 +24,13 @@ inline std::string getKeyAndUpdateIndex(unsigned int& i, std::string str) {
   return key;
 }
 
+inline bool containsDecimal(unsigned int i, std::string str) {
+  while (str[i] != ',' && !isspace(str[i]) && str[i] != '}' && str[i] != ']')
+    if (str[i++] == '.')
+      return true;
+  return false;
+}
+
 template <typename T>
 inline T getValueAndUpdateIndex(unsigned int& i, std::string std) {
   return getValueAndUpdateIndex<T>(i, std);
@@ -46,6 +53,19 @@ inline std::string
     value += str[i++];
   i++;  // move past second quotation mark
   return value;
+}
+
+template <>
+inline int getValueAndUpdateIndex<int>(unsigned int& i, std::string str) {
+  int value = 0;
+  bool negative = false;
+  if (str[i] == '-') {
+    negative = true;
+    i++;
+  }
+  while (str[i] != ',' && !isspace(str[i]) && str[i] != '}' && str[i] != ']')
+    value = value * 10 + (double)(str[i++] - '0');
+  return (negative ? -1 * value : value);
 }
 
 template <>
