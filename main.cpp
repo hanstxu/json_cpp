@@ -10,6 +10,7 @@ int main() {
   object.add<string>("2", "world");
   object.add<bool>("3", true);
   object.add<bool>("4", false);
+  object.add<double>("5", 234.1233);
   JSONArray array;
   array.add<string>("item one");
   array.add<string>("");
@@ -17,6 +18,7 @@ int main() {
   array.add<bool>(false);
   array.add<int>(17);
   array.add<int>(-23);
+  array.add<double>(-733.3411111);
   JSONObject test;
   test.add<JSONArray>("1", array);
   test.add<JSONObject>("2", object);

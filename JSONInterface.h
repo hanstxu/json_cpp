@@ -7,18 +7,6 @@ inline std::string getJSONString(std::string value) {
   return "\"" + value + "\"";
 }
 
-inline std::string getJSONNumber(int value) {
-  std::string result;
-  int abs_value = (value < 0 ? -value : value);
-  while ( abs_value > 0) {
-    char c = (abs_value % 10) + '0';
-    result = c + result;
-    abs_value /= 10;
-  }
-  
-  return (value < 0 ? "-" + result : result);
-}
-
 class JSONInterface {
 public:
   JSONInterface() { tab_spaces = ""; }
