@@ -217,6 +217,8 @@ JSONObject parseJSON<JSONObject>(std::string str) {
         object.add<std::string>(key, getValueAndUpdateIndex<std::string>(i, str));
       else if (str[i] == 't' || str[i] == 'f')
         object.add<bool>(key, getValueAndUpdateIndex<bool>(i, str));
+      else if (str[i] == '-' || isdigit(str[i]) || str[i] == '.')
+        object.add<double>(key, getValueAndUpdateIndex<double>(i, str));
     }
   }
   return object;
