@@ -25,16 +25,30 @@ int main() {
   test.add<JSONObject>("3", test);
   test.add<int>("4", 18);
   test.add<int>("5", -20);
+  cout << test.toString() << endl;
+  /*
   JSONArray arr_test;
   arr_test.add<JSONArray>(array);
   arr_test.add<JSONObject>(test);
   cout << arr_test.toString() << endl;
+  */
   
+  /*
   cout << (object.get<bool>("3")) << endl;
   cout << object.get<string>("1") << endl;
   cout << test.get<int>("4") << endl;
   cout << test.get<JSONArray>("1").toString() << endl;
   cout << test.get<JSONObject>("2").toString() << endl;
+  cout << test.toString() << endl;
+  */
+  
+  object.remove<string>("1");
+  test.remove<int>("4");
+  object.remove<double>("5");
+  object.remove<bool>("3");
+  test.remove<JSONArray>("1");
+  test.remove<JSONObject>("2");
+  cout << object.toString() << endl;
   cout << test.toString() << endl;
   return 0;
 }

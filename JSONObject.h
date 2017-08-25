@@ -15,6 +15,8 @@ public:
   T get(std::string key);
   template <typename T>
   void add(std::string key, T value);
+  template <typename T>
+  void remove(std::string key);
   void updateTabs(int num_tabs);
   std::string toString() const;
 private:

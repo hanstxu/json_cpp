@@ -78,6 +78,41 @@ void JSONObject::add<JSONArray>(std::string key, JSONArray value) {
   m_arrays[key] = value;
 }
 
+template <typename T>
+void JSONObject::remove(std::string key) {
+  remove<T>(this, key);
+}
+
+template <>
+void JSONObject::remove<std::string>(std::string key) {
+  m_strings.erase(key);
+}
+
+template <>
+void JSONObject::remove<int>(std::string key) {
+  m_numbers.erase(key);
+}
+
+template <>
+void JSONObject::remove<double>(std::string key) {
+  m_decimals.erase(key);
+}
+
+template <>
+void JSONObject::remove<bool>(std::string key) {
+  m_booleans.erase(key);
+}
+
+template <>
+void JSONObject::remove<JSONObject>(std::string key) {
+  m_objects.erase(key);
+}
+
+template <>
+void JSONObject::remove<JSONArray>(std::string key) {
+  m_arrays.erase(key);
+}
+
 void JSONObject::updateTabs(int num_tabs) {
   updateNumTabSpaces(num_tabs);
   std::map<std::string, JSONObject>::iterator obj_it;
