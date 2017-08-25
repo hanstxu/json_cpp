@@ -4,7 +4,6 @@ A lightweight JSON library for C++.
 
 ### Additional Stuff to Implement
 
-* Finish implementing *get* family of functions for JSONObject
 * Implement the *remove* family of function for JSONObject
 * Parsing and converting a JSON stream into the 2 JSON classes
 * Deciding what to do on adding multiple values to the same key in JSON objects
