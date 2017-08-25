@@ -18,6 +18,11 @@ int JSONObject::get<int>(std::string key) {
 }
 
 template <>
+double JSONObject::get<double>(std::string key) {
+  return m_decimals[key];
+}
+
+template <>
 bool JSONObject::get<bool>(std::string key) {
   return m_booleans[key];
 }
@@ -49,6 +54,11 @@ void JSONObject::add<std::string>(std::string key, std::string value) {
 template <>
 void JSONObject::add<int>(std::string key, int value) {
   m_numbers[key] = value;
+}
+
+template <>
+void JSONObject::add<double>(std::string key, double value) {
+  m_decimals[key] = value;
 }
 
 template <>

@@ -18,6 +18,7 @@ public:
 private:
   std::vector<std::string> m_strings;
   std::vector<int> m_numbers;
+  std::vector<double> m_decimals;
   std::vector<bool> m_booleans;
   std::vector<JSONArray> m_arrays;
   std::vector<JSONObject> m_objects;

@@ -20,6 +20,7 @@ public:
 private:
   std::map<std::string, std::string> m_strings;
   std::map<std::string, int> m_numbers;
+  std::map<std::string, double> m_decimals;
   std::map<std::string, bool> m_booleans;
   std::map<std::string, JSONObject> m_objects;
   std::map<std::string, JSONArray> m_arrays;

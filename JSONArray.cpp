@@ -18,6 +18,11 @@ void JSONArray::add<int>(int value) {
 }
 
 template <>
+void JSONArray::add<double>(double value) {
+  m_decimals.push_back(value);
+}
+
+template <>
 void JSONArray::add<bool>(bool value) {
   m_booleans.push_back(value);
 }
