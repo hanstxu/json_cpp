@@ -114,5 +114,24 @@ std::string JSONArray::toString() const {
 
 template <>
 JSONArray parseJSON<JSONArray>(std::string str) {
-  return JSONArray();
+  JSONArray array;
+  for (unsigned int i = 0; i < str.size(); i++) {
+    if (isspace(str[i]))
+      continue;
+    if (str[i] == '\"')
+      array.add<std::string>(getValueAndUpdateIndex<std::string>(i, str));
+    else if (str[i] == 'n')
+      array.add<std::string>(getValueAndUpdateIndex<std::string>(i, str));
+    else if (str[i] == 't' || str[i] == 'f')
+      array.add<bool>(getValueAndUpdateIndex<bool>(i, str));
+    else if (str[i] == '-' || isdigit(str[i])) {
+      if (containsDecimal(i, str))
+        array.add<double>(getValueAndUpdateIndex<double>(i, str));
+      else
+        array.add<int>(getValueAndUpdateIndex<int>(i, str));
+    }
+    else if (str[i] == '.')
+      array.add<double>(getValueAndUpdateIndex<double>(i, str));
+  }
+  return array;
 }

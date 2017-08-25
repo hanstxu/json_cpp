@@ -55,8 +55,11 @@ void check_functionality() {
 int main() {
   //check_functionality();
   
-  //cout << parseJSON<JSONArray>("").toString() << endl;
-  string test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
+  string test = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
+  test += "87]";
+  cout << parseJSON<JSONArray>(test).toString() << endl;
+  
+  test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
   test += "\"4\": -12341.234, \"5\": .21923444 + \"6\": -1272, \"7\":87";
   test += "}";
   cout << parseJSON<JSONObject>(test).toString() << endl;
