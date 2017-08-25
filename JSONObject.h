@@ -3,7 +3,6 @@
 
 #include "JSONInterface.h"
 #include <map>
-#include <string>
 
 #include "JSONArray.h"
 class JSONArray;

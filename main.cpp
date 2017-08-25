@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-int main() {
+void check_functionality() {
   JSONObject object;
   object.add<string>("1", "hello");
   object.add<string>("2", "world");
@@ -50,5 +50,13 @@ int main() {
   test.remove<JSONObject>("2");
   cout << object.toString() << endl;
   cout << test.toString() << endl;
+}
+
+int main() {
+  //check_functionality();
+  
+  //cout << parseJSON<JSONArray>("").toString() << endl;
+  cout << parseJSON<JSONObject>("{\"1\":true,\"2\":  \"hello world\", \"3\": null }").toString() << endl;
+  
   return 0;
 }

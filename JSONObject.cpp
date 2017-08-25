@@ -125,7 +125,7 @@ void JSONObject::updateTabs(int num_tabs) {
 
 std::string JSONObject::toString() const {
   if (m_strings.size() + m_booleans.size() + m_numbers.size() +
-    m_objects.size() + m_arrays.size() < 1)
+    m_decimals.size() + m_objects.size() + m_arrays.size() < 1)
     return "{}";
 
   std::string result = "{";
@@ -200,4 +200,24 @@ std::string JSONObject::toString() const {
   }
   
   return result + "\n" + tab_spaces + "}";
+}
+
+template <>
+JSONObject parseJSON<JSONObject>(std::string str) {
+  JSONObject object;
+  
+  for (unsigned int i = 0; i < str.size(); i++) {
+    if (isspace(str[i]))
+      continue;
+    else if (str[i] == '\"') {
+      std::string key = getKeyAndUpdateIndex(i, str);
+      if (str[i] == '\"')
+        object.add<std::string>(key, getValueAndUpdateIndex<std::string>(i, str));
+      else if (str[i] == 'n')
+        object.add<std::string>(key, getValueAndUpdateIndex<std::string>(i, str));
+      else if (str[i] == 't' || str[i] == 'f')
+        object.add<bool>(key, getValueAndUpdateIndex<bool>(i, str));
+    }
+  }
+  return object;
 }

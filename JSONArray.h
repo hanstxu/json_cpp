@@ -3,7 +3,6 @@
 
 #include "JSONInterface.h"
 #include <vector>
-#include <string>
 
 #include "JSONObject.h"
 class JSONObject;

@@ -50,7 +50,7 @@ void JSONArray::updateTabs(int num_tabs) {
 
 std::string JSONArray::toString() const {
   if (m_strings.size() + m_booleans.size() + m_numbers.size() +
-    m_arrays.size() + m_objects.size() < 1)
+    m_decimals.size() + m_arrays.size() + m_objects.size() < 1)
     return "[]";
   
   std::string result = "[";
@@ -110,4 +110,9 @@ std::string JSONArray::toString() const {
     result += ",\n\x20\x20" + tab_spaces + obj_it->toString();
   
   return result + "\n" + tab_spaces + "]";
+}
+
+template <>
+JSONArray parseJSON<JSONArray>(std::string str) {
+  return JSONArray();
 }
