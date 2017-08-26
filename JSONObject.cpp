@@ -202,6 +202,11 @@ std::string JSONObject::toString() const {
   return result + "\n" + tab_spaces + "}";
 }
 
+std::ostream& operator<<(std::ostream& os, const JSONObject& obj) {
+  os << obj.toString();
+  return os;
+}
+
 template <>
 JSONObject parseJSON<JSONObject>(unsigned int& i, std::string str) {
   JSONObject object;

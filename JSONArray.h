@@ -18,6 +18,7 @@ public:
   void remove(size_t n);
   void updateTabs(int num_tabs);
   std::string toString() const;
+  friend std::ostream& operator<<(std::ostream& os, const JSONArray& arr);
 private:
   std::vector<std::string> m_strings;
   std::vector<int> m_numbers;

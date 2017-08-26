@@ -3,6 +3,7 @@
 
 #include <string>
 #include <ctype.h>
+#include <ostream>  // not necessary on g++?
 
 /*
  * Parsing functions and helpers

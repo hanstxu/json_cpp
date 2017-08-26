@@ -18,6 +18,7 @@ public:
   void remove(std::string key);
   void updateTabs(int num_tabs);
   std::string toString() const;
+  friend std::ostream& operator<<(std::ostream& os, const JSONObject& obj);
 private:
   std::map<std::string, std::string> m_strings;
   std::map<std::string, int> m_numbers;

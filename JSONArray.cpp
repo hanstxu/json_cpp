@@ -182,6 +182,11 @@ std::string JSONArray::toString() const {
   return result + "\n" + tab_spaces + "]";
 }
 
+std::ostream& operator<<(std::ostream& os, const JSONArray& arr) {
+  os << arr.toString();
+  return os;
+}
+
 template <>
 JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
   JSONArray array;

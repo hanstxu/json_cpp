@@ -4,6 +4,8 @@ A lightweight JSON library for C++.
 
 ### Notes
 
+* Functionality is complete. The stuff to be implemented are just programming
+interface improvements (i.e. syntax, etc.).
 * Currently, all decimals are printed with a precision of 6 decimal places.
 * Currently, add multiple values to the same key in JSONObjects will just
 overwrite the previous value.
@@ -15,6 +17,7 @@ overwrite the previous value.
 * Adding error checking for bad arguments to functions
 (i.e. JSONArray::get<T>(size_t n))
 * Implementing exponents in the number data type
+* Overloading stream insertion operators
 * Implementing the [] operator with operator overloading (seems pretty hard to
 do and might have to look into C++11) and abstract all different data types
 away
