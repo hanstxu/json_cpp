@@ -74,6 +74,41 @@ void JSONArray::add<JSONObject>(JSONObject value) {
   m_objects.push_back(value);
 }
 
+template <typename T>
+void JSONArray::remove(size_t n) {
+  remove<T>(this, n);
+}
+
+template <>
+void JSONArray::remove<std::string>(size_t n) {
+  m_strings.erase(m_strings.begin() + n);
+}
+
+template <>
+void JSONArray::remove<int>(size_t n) {
+  m_numbers.erase(m_numbers.begin() + n);
+}
+
+template <>
+void JSONArray::remove<double>(size_t n) {
+  m_decimals.erase(m_decimals.begin() + n);
+}
+
+template <>
+void JSONArray::remove<bool>(size_t n) {
+  m_booleans.erase(m_booleans.begin() + n);
+}
+
+template <>
+void JSONArray::remove<JSONArray>(size_t n) {
+  m_arrays.erase(m_arrays.begin() + n);
+}
+
+template <>
+void JSONArray::remove<JSONObject>(size_t n) {
+  m_objects.erase(m_objects.begin() + n);
+}
+
 void JSONArray::updateTabs(int num_tabs) {
   updateNumTabSpaces(num_tabs);
   for (unsigned int i = 0; i < m_arrays.size(); i++)

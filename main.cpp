@@ -52,12 +52,25 @@ void check_functionality_of_classes() {
   cout << test.toString() << endl;
   */
   
+  /*
   cout << array.get<std::string>(0) << endl;
   cout << array.get<int>(0) << endl;
   cout << array.get<double>(0) << endl;
   cout << array.get<bool>(0) << endl;
   cout << arr_test.get<JSONArray>(0).toString() << endl;
   cout << arr_test.get<JSONObject>(0).toString() << endl;
+  */
+  
+  /*
+  array.remove<string>(0);
+  array.remove<int>(0);
+  array.remove<double>(0);
+  array.remove<bool>(0);
+  arr_test.remove<JSONArray>(0);
+  arr_test.remove<JSONObject>(0);
+  cout << array.toString() << endl;
+  cout << arr_test.toString() << endl;
+  */
 }
 
 void check_functionality_of_parsing() {
@@ -79,10 +92,7 @@ void check_functionality_of_parsing() {
 }
 
 int main() {
-  check_functionality_of_classes();
+  //check_functionality_of_classes();
   //check_functionality_of_parsing();
-  
-  
-  
   return 0;
 }

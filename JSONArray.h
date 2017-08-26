@@ -14,6 +14,8 @@ public:
   T get(size_t n);
   template <typename T>
   void add(T value);
+  template <typename T>
+  void remove(size_t n);
   void updateTabs(int num_tabs);
   std::string toString() const;
 private:
