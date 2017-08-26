@@ -12,6 +12,7 @@ overwrite the previous value.
 
 ### Additional Stuff to To Be Implemented Eventually
 
+* Build all essentials into a static or dynamic library? (TBD)
 * Implementing some of the functions to look like to_string (i.e. function
   overloading with different parameters)
 * Adding error checking for bad arguments to functions
