@@ -134,6 +134,8 @@ JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
       array.add<double>(getValueAndUpdateIndex<double>(i, str));
     else if (str[i] == '[')
       array.add<JSONArray>(parseJSON<JSONArray>(++i, str));
+    else if (str[i] == '{')
+      array.add<JSONObject>(parseJSON<JSONObject>(i, str));
     else if (str[i] == ']')
       return array;
   }

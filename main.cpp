@@ -55,16 +55,24 @@ void check_functionality() {
 int main() {
   //check_functionality();
   
-  string test = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
-  test += "87, [[[],[]]]]";
-  unsigned int index = 1;
-  cout << parseJSON<JSONArray>(index, test).toString() << endl;
+  string object = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
+  object += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
+  object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":false} }";
   
-  test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
-  test += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
-  test += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":false} }";
+  string array = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
+  array += "87, [[" + object + ",[]]]]";
+  unsigned int index = 1;
+  cout << parseJSON<JSONArray>(index, array).toString() << endl;
+  
+  array = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
+  array += "87, [[[],[]]]]";
+  
+  object = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
+  object += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
+  object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":";
+  object += array + " } }";
   index = 0;
-  cout << parseJSON<JSONObject>(index, test).toString() << endl;
+  cout << parseJSON<JSONObject>(index, object).toString() << endl;
   
   return 0;
 }

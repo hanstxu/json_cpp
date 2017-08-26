@@ -8,7 +8,7 @@ A lightweight JSON library for C++.
 
 ### Additional Stuff to Implement
 
-* Parsing and converting a JSON stream into the 2 JSON classes
+* Fix comma bug in JSONArray
 * Implement the *get* and *remove* family of functions for JSONArray
 * Implementing some of the functions to look like to_string (i.e. function
   overloading with different parameters)
