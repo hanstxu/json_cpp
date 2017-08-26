@@ -56,13 +56,13 @@ int main() {
   //check_functionality();
   
   string test = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
-  test += "87]";
-  unsigned int index = 0;
+  test += "87, [[[],[]]]]";
+  unsigned int index = 1;
   cout << parseJSON<JSONArray>(index, test).toString() << endl;
   
   test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
-  test += "\"4\": -12341.234, \"5\": .21923444 + \"6\": -1272, \"7\":87";
-  test += "}";
+  test += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
+  test += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":false} }";
   index = 0;
   cout << parseJSON<JSONObject>(index, test).toString() << endl;
   

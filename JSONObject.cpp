@@ -225,6 +225,10 @@ JSONObject parseJSON<JSONObject>(unsigned int& i, std::string str) {
       }
       else if (str[i] == '.')
         object.add<double>(key, getValueAndUpdateIndex<double>(i, str));
+      else if (str[i] == '{')
+        object.add<JSONObject>(key, parseJSON<JSONObject>(i, str));
+      else if (str[i] == '}')
+        return object;
     }
   }
   return object;

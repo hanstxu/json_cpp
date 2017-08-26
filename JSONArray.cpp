@@ -118,7 +118,7 @@ JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
   for (; i < str.size(); i++) {
     if (isspace(str[i]))
       continue;
-    if (str[i] == '\"')
+    else if (str[i] == '\"')
       array.add<std::string>(getValueAndUpdateIndex<std::string>(i, str));
     else if (str[i] == 'n')
       array.add<std::string>(getValueAndUpdateIndex<std::string>(i, str));
@@ -132,6 +132,10 @@ JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
     }
     else if (str[i] == '.')
       array.add<double>(getValueAndUpdateIndex<double>(i, str));
+    else if (str[i] == '[')
+      array.add<JSONArray>(parseJSON<JSONArray>(++i, str));
+    else if (str[i] == ']')
+      return array;
   }
   return array;
 }
