@@ -57,12 +57,14 @@ int main() {
   
   string test = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
   test += "87]";
-  cout << parseJSON<JSONArray>(test).toString() << endl;
+  unsigned int index = 0;
+  cout << parseJSON<JSONArray>(index, test).toString() << endl;
   
   test = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
   test += "\"4\": -12341.234, \"5\": .21923444 + \"6\": -1272, \"7\":87";
   test += "}";
-  cout << parseJSON<JSONObject>(test).toString() << endl;
+  index = 0;
+  cout << parseJSON<JSONObject>(index, test).toString() << endl;
   
   return 0;
 }

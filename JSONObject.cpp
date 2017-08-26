@@ -203,10 +203,10 @@ std::string JSONObject::toString() const {
 }
 
 template <>
-JSONObject parseJSON<JSONObject>(std::string str) {
+JSONObject parseJSON<JSONObject>(unsigned int& i, std::string str) {
   JSONObject object;
   
-  for (unsigned int i = 0; i < str.size(); i++) {
+  for (; i < str.size(); i++) {
     if (isspace(str[i]))
       continue;
     else if (str[i] == '\"') {

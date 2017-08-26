@@ -113,9 +113,9 @@ std::string JSONArray::toString() const {
 }
 
 template <>
-JSONArray parseJSON<JSONArray>(std::string str) {
+JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
   JSONArray array;
-  for (unsigned int i = 0; i < str.size(); i++) {
+  for (; i < str.size(); i++) {
     if (isspace(str[i]))
       continue;
     if (str[i] == '\"')
