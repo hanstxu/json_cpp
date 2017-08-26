@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-void check_functionality() {
+void check_functionality_of_classes() {
   JSONObject object;
   object.add<string>("1", "hello");
   object.add<string>("2", "world");
@@ -26,12 +26,11 @@ void check_functionality() {
   test.add<int>("4", 18);
   test.add<int>("5", -20);
   cout << test.toString() << endl;
-  /*
+
   JSONArray arr_test;
   arr_test.add<JSONArray>(array);
   arr_test.add<JSONObject>(test);
   cout << arr_test.toString() << endl;
-  */
   
   /*
   cout << (object.get<bool>("3")) << endl;
@@ -42,6 +41,7 @@ void check_functionality() {
   cout << test.toString() << endl;
   */
   
+  /*
   object.remove<string>("1");
   test.remove<int>("4");
   object.remove<double>("5");
@@ -50,11 +50,17 @@ void check_functionality() {
   test.remove<JSONObject>("2");
   cout << object.toString() << endl;
   cout << test.toString() << endl;
+  */
+  
+  cout << array.get<std::string>(0) << endl;
+  cout << array.get<int>(0) << endl;
+  cout << array.get<double>(0) << endl;
+  cout << array.get<bool>(0) << endl;
+  cout << arr_test.get<JSONArray>(0).toString() << endl;
+  cout << arr_test.get<JSONObject>(0).toString() << endl;
 }
 
-int main() {
-  //check_functionality();
-  
+void check_functionality_of_parsing() {
   string object = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
   object += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
   object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":false} }";
@@ -64,15 +70,19 @@ int main() {
   unsigned int index = 1;
   cout << parseJSON<JSONArray>(index, array).toString() << endl;
   
-  array = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
-  array += "87, [[[],[]]]]";
-  
   object = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
-  object += "\"4\": -12341.234, \"5\":\n\t .21923444 + \"6\": -1272, \"7\":87,";
+  object += "\"4\": -12341.234, \"5\":\n\t\t\t\t\n\n\n\n\n .21923444 + \"6\": -1272, \"7\":87,";
   object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":";
   object += array + " } }";
   index = 0;
   cout << parseJSON<JSONObject>(index, object).toString() << endl;
+}
+
+int main() {
+  check_functionality_of_classes();
+  //check_functionality_of_parsing();
+  
+  
   
   return 0;
 }

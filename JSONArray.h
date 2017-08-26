@@ -11,6 +11,8 @@ class JSONArray : public JSONInterface {
 public:
   JSONArray();
   template <typename T>
+  T get(size_t n);
+  template <typename T>
   void add(T value);
   void updateTabs(int num_tabs);
   std::string toString() const;

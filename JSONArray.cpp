@@ -3,6 +3,41 @@
 JSONArray::JSONArray() {}
 
 template <typename T>
+T JSONArray::get(size_t n) {
+  return get<T>(this, n);
+}
+
+template <>
+std::string JSONArray::get<std::string>(size_t n) {
+  return m_strings[n];
+}
+
+template <>
+int JSONArray::get<int>(size_t n) {
+  return m_numbers[n];
+}
+
+template <>
+double JSONArray::get<double>(size_t n) {
+  return m_decimals[n];
+}
+
+template <>
+bool JSONArray::get<bool>(size_t n) {
+  return m_booleans[n];
+}
+
+template <>
+JSONArray JSONArray::get<JSONArray>(size_t n) {
+  return m_arrays[n];
+}
+
+template <>
+JSONObject JSONArray::get<JSONObject>(size_t n) {
+  return m_objects[n];
+}
+
+template <typename T>
 void JSONArray::add(T value) {
   add<T>(this, value);
 }
