@@ -102,7 +102,7 @@ std::string JSONArray::toString() const {
   
   std::vector<JSONObject>::const_iterator obj_it = m_objects.begin();
   if (m_strings.size() < 1 && m_numbers.size() < 1 && m_decimals.size() < 1 &&
-    m_booleans.size() < 1 && m_objects.size() < 1 && obj_it != m_objects.end()) {
+    m_booleans.size() < 1 && m_arrays.size() < 1 && obj_it != m_objects.end()) {
     result += "\n\x20\x20" + tab_spaces + obj_it->toString();
     ++obj_it;
   }
