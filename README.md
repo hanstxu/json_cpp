@@ -55,18 +55,23 @@ To see the string representations of the objects you can either the
 **toString** function or insert the instances of the classes into a stream.
 
 ```c++
-cout << array.toString() << endl;
-cout << object << endl;
+cout << "array:" << endl;
+cout << array.toString() << endl << endl;
+cout << "object:" << endl;
+cout << object << endl << endl;
 ```
 
 Will output the following
 
 ```
+array:
 [
   "hello world",
   -2823,
   true
 ]
+
+object:
 {
   "1": null,
   "2": 325.178394,
@@ -74,6 +79,78 @@ Will output the following
 }
 ```
 
+Accordingly, you can add JSONObject and JSONArrays to JSONObjects and JSONArrays.
+
+```c++
+JSONArray nested_array;
+nested_array.add<JSONArray>(JSONArray());
+nested_array.add<JSONObject>(JSONObject());
+  
+cout << "nested_array:" << endl;
+cout << nested_array << endl << endl;
+  
+JSONObject everything;
+everything.add<JSONArray>("array", array);
+everything.add<JSONObject>("object", object);
+everything.add<JSONArray>("nested_array", nested_array);
+  
+cout << "everything:" << endl;
+cout << everything << endl << endl;
+```
+
+```
+nested_array:
+[
+  [],
+  {}
+]
+
+everything:
+{
+  "object": {
+    "1": null,
+    "2": 325.178394,
+    "3": false
+  },
+  "array": [
+    "hello world",
+    -2823,
+    true
+  ],
+  "nested_array": [
+    [],
+    {}
+  ]
+}
+```
+
+There are also remove and get functions, where you need to specify the
+type. For JSONArrays, the argument that you pass in is the index. For
+JSONObjects, the argument that you pass in is the key value.
+
+```c++
+cout << "get examples:" << endl;
+cout << object.get<double>("2") << endl;
+cout << array.get<string>(0) << endl;
+cout << nested_array.get<JSONArray>(0) << endl << endl;
+  
+array.remove<int>(0);
+array.remove<bool>(0);
+  
+cout << "array with 2 values removed:" << endl;
+cout << array << endl << endl;
+  
+everything.remove<JSONArray>("array");
+everything.remove<JSONArray>("nested_array");
+cout << "everything with only one value:" << endl;
+cout << everything << endl << endl;
+```
+
+*Note that the get functions only return copies of the values, not an actual
+reference to the values. This means that something like
+object.get<JSONArray>("1").remove<int>(2) will not actually remove
+anything from the object. It will actually remove the 3rd value from a
+copy of the JSONArray mapped to the "1" key in object.*
 
 
 ## Miscellaneous
