@@ -1,12 +1,25 @@
 CXX=g++
 CXXOPTIMIZE= -O2
-CXXFLAGS= -g -Wall -std=c++0x $(CXXOPTIMIZE)
-CLASSES=JSONInterface.h JSONObject.h JSONArray.h JSONObject.cpp JSONArray.cpp
+CXXDEBUG = -g
+CXXFLAGS= -Wall -std=c++0x $(CXXOPTIMIZE)
+HEADERS=JSONInterface.h JSONObject.h JSONArray.h
+CLASSES=JSONObject.cpp JSONArray.cpp
 
-all: main
+all: libjson example
 
-main: $(CLASSES)
-	$(CXX) -o $@ $^ $(CXXFLAGS) $@.cpp
+libjson: $(CLASSES)
+	$(CXX) -c $(CXXFLAGS) $^
+	ar -cvq $@.a JSONArray.o JSONObject.o
+	rm -rf JSONArray.o JSONObject.o
+
+example:
+	$(CXX) -o $@ $(CXXFLAGS) $(CXXDEBUG) $@.cpp libjson.a
+
+libClean:
+	rm -rf libjson.a
+	
+exampleClean:
+	rm -rf example
 
 clean:
-	rm -rf *.o main
+	rm -rf *.o example libjson.a *.h.gch
