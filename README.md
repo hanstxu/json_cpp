@@ -2,6 +2,15 @@
 
 A lightweight JSON library for C++.
 
+The most important files are: *JSONInterface.h*, *JSONArray.h*,
+*JSONObject.h*, *JSONArray.cpp*, *JSONObject.cpp*.
+
+*Makefile* contains commands to build those files into a linux static library.
+*example.cpp* is a sample program that showcases how to use the library.
+
+If you don't use linux or want to use your own IDE, you can just add the five
+files at the top to integrate the library.
+
 ## How to Build and Link
 
 **TL;DR**: To build the JSON library and the example source code that uses it,
@@ -156,7 +165,7 @@ cout << array << endl << endl;
   
 everything.remove<JSONArray>("array");
 everything.remove<JSONArray>("nested_array");
-cout << "everything with only one value:" << endl;
+cout << "everything with only one JSONObject:" << endl;
 cout << everything << endl << endl;
 ```
 
@@ -247,16 +256,15 @@ overwrite the previous value.
 representations and all empty strings are mapped to null in the string
 representation.
 
-### Additional Stuff to To Be Implemented Eventually
+### Additional stuff to do when I come back to this project
 
-* Implementing some of the functions to look like to_string (i.e. function
-  overloading with different parameters)
-* Adding error checking for bad arguments to functions
-(i.e. JSONArray::get<T>(size_t n))
-* Implementing exponents in the number data type
-* Overloading stream insertion operators
+* Parsing exponents (i.e. e, e+, e-, E, E+, E-)
+* Error handling for get, remove, and parsing functions
+* Overloading stream insertion operators (i.e. cin >> object)
+* Figuring out how to_string works and trying to implement that into some
+of the functions (i.e. [read later](https://stackoverflow.com/questions/33399594/making-a-user-defined-class-stdto-stringable))
 * Changing the compilation of the source code into a shared object library
 instead of a static library
 * Implementing the [] operator with operator overloading (seems pretty hard to
-do and might have to look into C++11) and abstract all different data types
+do and might have to look into C++11) to abstract all different data types
 away
