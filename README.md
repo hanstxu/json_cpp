@@ -5,7 +5,7 @@ A lightweight JSON library for C++.
 ## How to Build and Link
 
 **TL;DR**: To build the JSON library and the example source code that uses it, type
-```bash make```.
+` make`.
 
 ### Building the Library
 
@@ -17,7 +17,7 @@ make libjson
 
 and this will create the static library **libjson.a**.
 
-###Link the Library to your Program
+### Link the Library to your Program
 
 To add this static library to your program, just add it to your list of dependencies when you compile your program. That is, treat the library like any other .cpp or .h file.
 
@@ -29,9 +29,10 @@ g++ <options> -o <program-name> <source files> libjson.a
 
 You can include one or both of the following two header files.
 
-```C++
+```c++
 #include "JSONArray.h"
-``` or ```C++ #include "JSONObject.h"```
+#include "JSONObject.h"
+```
 
 
 
