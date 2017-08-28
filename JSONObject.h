@@ -28,4 +28,5 @@ private:
   std::map<std::string, JSONArray> m_arrays;
 };
 
+JSONObject parseJSON_objectHelper (unsigned int& i, std::string str);
 #endif

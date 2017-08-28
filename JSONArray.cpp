@@ -188,7 +188,12 @@ std::ostream& operator<<(std::ostream& os, const JSONArray& arr) {
 }
 
 template <>
-JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
+JSONArray parseJSON<JSONArray>(std::string str) {
+  unsigned int i = 1;
+  return parseJSON_arrayHelper(i, str);
+}
+
+JSONArray parseJSON_arrayHelper(unsigned int& i, std::string str) {
   JSONArray array;
   for (; i < str.size(); i++) {
     if (isspace(str[i]))
@@ -208,9 +213,9 @@ JSONArray parseJSON<JSONArray>(unsigned int& i, std::string str) {
     else if (str[i] == '.')
       array.add<double>(getValueAndUpdateIndex<double>(i, str));
     else if (str[i] == '[')
-      array.add<JSONArray>(parseJSON<JSONArray>(++i, str));
+      array.add<JSONArray>(parseJSON_arrayHelper(++i, str));
     else if (str[i] == '{')
-      array.add<JSONObject>(parseJSON<JSONObject>(i, str));
+      array.add<JSONObject>(parseJSON_objectHelper(i, str));
     else if (str[i] == ']')
       return array;
   }

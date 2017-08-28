@@ -207,8 +207,15 @@ std::ostream& operator<<(std::ostream& os, const JSONObject& obj) {
   return os;
 }
 
+
+
 template <>
-JSONObject parseJSON<JSONObject>(unsigned int& i, std::string str) {
+JSONObject parseJSON<JSONObject>(std::string str) {
+  unsigned int i = 0;
+  return parseJSON_objectHelper(i, str);
+}
+
+JSONObject parseJSON_objectHelper (unsigned int& i, std::string str) {
   JSONObject object;
   
   for (; i < str.size(); i++) {
@@ -231,9 +238,9 @@ JSONObject parseJSON<JSONObject>(unsigned int& i, std::string str) {
       else if (str[i] == '.')
         object.add<double>(key, getValueAndUpdateIndex<double>(i, str));
       else if (str[i] == '{')
-        object.add<JSONObject>(key, parseJSON<JSONObject>(i, str));
+        object.add<JSONObject>(key, parseJSON_objectHelper(i, str));
       else if (str[i] == '[')
-        object.add<JSONArray>(key, parseJSON<JSONArray>(++i, str));
+        object.add<JSONArray>(key, parseJSON_arrayHelper(++i, str));
       else if (str[i] == '}')
         return object;
     }

@@ -28,4 +28,6 @@ private:
   std::vector<JSONObject> m_objects;
 };
 
+JSONArray parseJSON_arrayHelper(unsigned int& i, std::string str);
+
 #endif

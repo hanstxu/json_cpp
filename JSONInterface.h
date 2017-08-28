@@ -104,8 +104,8 @@ inline bool getValueAndUpdateIndex<bool>(unsigned int& i, std::string str) {
 }
 
 template <typename T>
-inline T parseJSON(unsigned int& i, std::string str) {
-  return parseJSON<T>(i, str);
+inline T parseJSON(std::string str) {
+  return parseJSON<T>(str);
 }
 
 /*

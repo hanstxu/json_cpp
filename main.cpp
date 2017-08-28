@@ -81,15 +81,13 @@ void check_functionality_of_parsing() {
   
   string array = "[true, \"hello world\", null, -12341.234, .21923444, -1272,";
   array += "87, [[" + object + ",[]]]]";
-  unsigned int index = 1;
-  cout << parseJSON<JSONArray>(index, array) << endl;
+  cout << parseJSON<JSONArray>(array) << endl;
   
   object = "{\"1\":true,\"2\":  \"hello world\", \"3\": null,";
-  object += "\"4\": -12341.234, \"5\":\n\t\t\t\t\n\n\n\n\n .21923444 + \"6\": -1272, \"7\":87,";
-  object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", \"c\":";
-  object += array + " } }";
-  index = 0;
-  cout << parseJSON<JSONObject>(index, object) << endl;
+  object += "\"4\": -12341.234, \"5\":\n .21923444 + \"6\": -1272, \"7\":87,";
+  object += "\"8\": { \"A\":{\"a\":\n\t{-5021},\"b\":\"what is going on\", ";
+  object += "\"c\":" + array + " } }";
+  cout << parseJSON<JSONObject>(object) << endl;
 }
 
 int main() {
