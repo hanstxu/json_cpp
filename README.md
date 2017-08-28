@@ -29,6 +29,8 @@ g++ <options> -o <program-name> <source files> libjson.a
 
 ## Using the Library
 
+### Headers
+
 You can include one or both of the following two header files.
 
 ```c++
@@ -36,9 +38,12 @@ You can include one or both of the following two header files.
 #include "JSONObject.h"
 ```
 
+### Adding Values to the Two Classes
+
 There are two main classes, JSONArray and JSONObject. You can add the following
 primitive data types to a JSONArray or a JSONObject:
 
+**Code**
 ```c++
 JSONArray array;
 array.add<string>("hello world");
@@ -51,9 +56,12 @@ object.add<double>(325.178394);
 object.add<bool>(false);
 ```
 
+### Printing out the JSON
+
 To see the string representations of the objects you can either the
 **toString** function or insert the instances of the classes into a stream.
 
+**Code**
 ```c++
 cout << "array:" << endl;
 cout << array.toString() << endl << endl;
@@ -61,8 +69,7 @@ cout << "object:" << endl;
 cout << object << endl << endl;
 ```
 
-Will output the following
-
+**Output**
 ```
 array:
 [
@@ -79,8 +86,11 @@ object:
 }
 ```
 
+### Recursive Classes
+
 Accordingly, you can add JSONObject and JSONArrays to JSONObjects and JSONArrays.
 
+**Code**
 ```c++
 JSONArray nested_array;
 nested_array.add<JSONArray>(JSONArray());
@@ -98,6 +108,7 @@ cout << "everything:" << endl;
 cout << everything << endl << endl;
 ```
 
+**Output**
 ```
 nested_array:
 [
@@ -124,10 +135,13 @@ everything:
 }
 ```
 
+### Get and Remove
+
 There are also remove and get functions, where you need to specify the
 type. For JSONArrays, the argument that you pass in is the index. For
 JSONObjects, the argument that you pass in is the key value.
 
+**Code**
 ```c++
 cout << "get examples:" << endl;
 cout << object.get<double>("2") << endl;
@@ -146,12 +160,79 @@ cout << "everything with only one value:" << endl;
 cout << everything << endl << endl;
 ```
 
+**Output**
+```
+get examples:
+325.178
+hello world
+[]
+
+array with 2 values removed:
+[
+  "hello world"
+]
+
+everything with only one value:
+{
+  "object": {
+    "1": null,
+    "2": 325.178394,
+    "3": false
+  }
+}
+```
+
 *Note that the get functions only return copies of the values, not an actual
 reference to the values. This means that something like
 object.get<JSONArray>("1").remove<int>(2) will not actually remove
 anything from the object. It will actually remove the 3rd value from a
 copy of the JSONArray mapped to the "1" key in object.*
 
+### Parsing json
+
+If you have a string containing valid json, you can use the following two functions to parse those strings into a JSONArray or JSONObject.
+
+**Code**
+```c++
+string json_array = "[[{},[]], \t\n\"hi\", -23.2,\n\n 1202, null]";
+string json_object = "{\"1\": [502,\"json\",{}], \n\t\"wow\":\n\n 42}";
+array = parseJSON<JSONArray>(json_array);
+object = parseJSON<JSONObject>(json_object);
+
+cout << "array:" << endl;
+cout << array << endl << endl;
+cout << "object:" << endl;
+cout << object << endl << endl;
+```
+
+**Output**
+```
+
+array:
+[
+  "hi",
+  null,
+  1202,
+  -23.200000,
+  [
+    [],
+    {}
+  ]
+]
+
+object:
+{
+  "wow": 42,
+  "1": [
+    "json",
+    502,
+    {}
+  ]
+}
+```
+
+*Right now, if you pass in invalid JSON strings to the parsing function,
+there's undefined behavior.*
 
 ## Miscellaneous
 

@@ -244,6 +244,8 @@ JSONObject parseJSON_objectHelper (unsigned int& i, std::string str) {
       else if (str[i] == '}')
         return object;
     }
+    else if (str[i] == '}')
+      return object;
   }
   return object;
 }
