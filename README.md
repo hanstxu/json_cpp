@@ -11,6 +11,9 @@ The most important files are: *JSONInterface.h*, *JSONArray.h*,
 If you don't use linux or want to use your own IDE, you can just add the five
 files at the top to integrate the library.
 
+[alexa_endpoint_cpp](https://github.com/hanstxu/alexa_endpoint_cpp) is a
+project that makes use of this library.
+
 ## How to Build and Link
 
 **TL;DR**: To build the JSON library and the example source code that uses it,
