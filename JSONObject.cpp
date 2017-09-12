@@ -223,6 +223,7 @@ JSONObject parseJSON_objectHelper (unsigned int& i, std::string str) {
       continue;
     else if (str[i] == '\"') {
       std::string key = getKeyAndUpdateIndex(i, str);
+      char c = str[i];
       if (str[i] == '\"')
         object.add<std::string>(key, getValueAndUpdateIndex<std::string>(i, str));
       else if (str[i] == 'n')
@@ -243,6 +244,11 @@ JSONObject parseJSON_objectHelper (unsigned int& i, std::string str) {
         object.add<JSONArray>(key, parseJSON_arrayHelper(++i, str));
       else if (str[i] == '}')
         return object;
+      
+      // make sure to not skip '}'so that JSONObjects are closed
+      if (c == '\"' || c == 'n' || c == 't' || c == 'f' || c == '-' ||
+        isdigit(c) || c == '.')
+        i--;
     }
     else if (str[i] == '}')
       return object;
